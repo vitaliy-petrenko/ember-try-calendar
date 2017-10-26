@@ -12,7 +12,7 @@ export default Component.extend({
   calendarService: service('calendar'),
 
   getSelectionDate() {
-    return this.get('calendarService').get('selectedDate');
+    return this.get('calendarService').get('selectedDate').clone();
   },
 
   title: computed('calendarService.selectedDate', 'view', 'timeZone.current', function() {
