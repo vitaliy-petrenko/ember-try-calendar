@@ -35,7 +35,9 @@ export default Component.extend({
     const view = this.get('view'),
       cells = [],
       selectedDate = this.get('selectedDate'),
-      currentMoment = moment();
+      currentMoment = moment().startOf('day'),
+      currentMD = parseInt(currentMoment.format('MDD'));
+
     let firstDate, lastDate;
 
     if (view === 'week') {
@@ -47,11 +49,12 @@ export default Component.extend({
     }
 
     for (let i = 0, j = -1; lastDate.isAfter(firstDate); i++, firstDate.add(1, 'days')) {
-      const date = firstDate.clone(),
+      const tempDate = firstDate.clone(),
+        tempMD = parseInt(tempDate.format('MDD')),
         cell = {
-          title: date.date() === 1 ? date.format('D MMMM') : date.format('D'),
-          past: currentMoment.clone().startOf('day').isAfter(date),
-          today: currentMoment.isSame(date, 'd')
+          title: tempDate.date() === 1 ? tempDate.format('D MMMM') : tempDate.format('D'),
+          past: currentMD > tempMD,
+          today: currentMD === tempMD
         };
 
       if (i % 7 === 0) {
