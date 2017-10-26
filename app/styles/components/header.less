@@ -1,0 +1,13 @@
+@import (reference) '../variables';
+@import (reference) '../mixins/grid';
+
+.header {
+    background: @color-p-2;
+    color: @color-g-1;
+    text-transform: uppercase;
+}
+
+.header__in {
+    .make-default-padding();
+    .make-wrap();
+}

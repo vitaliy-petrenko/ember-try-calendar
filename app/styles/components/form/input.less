@@ -1,0 +1,13 @@
+@import (reference) '../../variables';
+@input-height: 36px;
+
+.input {
+    display: inline-block;
+    height: @input-height;
+    background: @color-g-1;
+    border-radius: @border-radius-base;
+    font-size: @font-size-base;
+    &:focus {
+        box-shadow: 0 0 4px @color-g-4;
+    }
+}

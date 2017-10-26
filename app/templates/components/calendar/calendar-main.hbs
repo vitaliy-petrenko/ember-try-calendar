@@ -1,0 +1,47 @@
+<div class="box box--full">
+    <div class="box__head">
+        <div class="box__head-item">
+            <div class="button-group">
+                <div class="button button--arrow-l" {{action "changeDate" -1}}></div>
+                <div class="button button--arrow-r" {{action "changeDate" 1}}></div>
+            </div>
+        </div>
+        <div class="box__head-item box__head-item--main">
+            <h2 class="box__title">
+                {{title}}
+            </h2>
+        </div>
+        <div class="box__head-item">
+            <div class="tabs">
+                {{#link-to 'calendar.week' class="tabs__item"}}
+                    Week
+                {{/link-to}}
+                {{#link-to 'calendar.month' class="tabs__item"}}
+                    Month
+                {{/link-to}}
+            </div>
+        </div>
+        <label class="box__head-item">
+            <select class="select" onchange={{action "changeTimeZone" value="target.value"}}>
+                {{#each timeZone.list as |timeZone|}}
+                    <option value="{{timeZone}}">{{timeZone}}</option>
+                {{/each}}
+            </select>
+        </label>
+    </div>
+    <div class="box__content box__content--full">
+        <div class="calendar calendar--full">
+            {{calendar/week-days}}
+            <div class="calendar__body">
+                {{#each cells as |row|}}
+                    <div class="calendar__row">
+                        {{#each row as |cell|}}
+                            {{calendar/calendar-cell title=cell.title today=cell.today past=cell.past}}
+                        {{/each}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+

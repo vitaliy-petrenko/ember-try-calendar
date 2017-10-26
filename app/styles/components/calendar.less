@@ -1,0 +1,69 @@
+@import (reference) '../variables';
+@cell-width: 100%/7;
+@border: 1px solid @color-g-4;
+.calendar {
+    background: @color-g-2;
+    font-size: @font-size-small;
+}
+.calendar--full {
+    .calendar__body {
+        border-left: 0;
+        border-right: 0;
+    }
+}
+.calendar__week-days {
+    display: flex;
+}
+.calendar__top-cell {
+    width: @cell-width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: @font-size-small;
+    color: @color-g-4;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 8px 4px;
+}
+.calendar__body {
+    border: @border;
+}
+.calendar__row {
+    display: flex;
+    & + & {
+        border-top: @border;
+    }
+}
+.calendar__cell {
+    width: @cell-width;
+    min-height: 80px;
+    float: left;
+    & + & {
+        border-left: @border;
+    }
+}
+.calendar-day {
+    font-size: @font-size-small;
+    padding: 4px 8px;
+    color: @color-p-1;
+    position: relative;
+    min-height: 100%;
+    &.active {
+        box-shadow: 0 0 4px @color-p-1;
+        z-index: 1;
+        background: @color-g-1;
+        .calendar-day__title {
+            font-weight: 600;
+        }
+    }
+    &.past {
+        opacity: .2;
+    }
+}
+.calendar-day__title {
+    padding: 4px 0;
+    border-bottom: @border;
+}
+.calendar-day__content {
+    margin-top: 4px;
+}

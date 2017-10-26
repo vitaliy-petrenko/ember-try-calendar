@@ -1,0 +1,32 @@
+@import (reference) '../variables';
+@import (reference) '../mixins/grid';
+.box {
+    background: @color-g-1;
+    border-radius: @border-radius-base;
+}
+.box--full {
+    border-radius: 0;
+}
+.box__head {
+    .make-default-padding();
+    border-bottom: 1px solid @color-g-2;
+    display: flex;
+    align-items: center;
+}
+.box__content {
+    .make-default-padding();
+}
+.box__content--full {
+    padding: 0;
+}
+.box__head-item {
+    & + & {
+        margin-left: @offset-sm;
+    }
+}
+.box__head-item--main {
+    flex: 1;
+}
+.box__title {
+    font-size: @font-size-large;
+}

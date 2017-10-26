@@ -7,6 +7,12 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('404', { path: '/*path' });
+
+  this.route('calendar', function() {
+    this.route('month');
+    this.route('week');
+  });
 });
 
 export default Router;

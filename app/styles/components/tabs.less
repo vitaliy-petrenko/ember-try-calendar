@@ -1,0 +1,45 @@
+@import (reference) '../variables';
+@import (reference) '../mixins/ui';
+.tabs {
+    display: flex;
+}
+.tabs__item {
+    position: relative;
+    line-height: 20/14;
+    color: @color-g-4;
+    transition: color .05s;
+    .control();
+
+    & + & {
+        margin-left: 8px;
+    }
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        right: 0;
+        height: 2px;
+        background: transparent;
+        transition: left .2s .1s, right .2s .1s;
+        will-change: left, right;
+    }
+    &:hover {
+        color: @color-p-1;
+    }
+    &.active {
+        cursor: default;
+        color: @color-p-1;
+        & ~ .tabs__item:after {
+            left: 0;
+            right: 100%;
+        }
+        &:after {
+            left: 0;
+            right: 0;
+            background: @color-p-2;
+            transition: left .2s, right .2s;
+        }
+    }
+}

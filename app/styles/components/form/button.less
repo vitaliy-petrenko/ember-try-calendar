@@ -1,0 +1,72 @@
+@import (reference) '../../variables';
+@import (reference) '../../mixins/ui';
+
+@border-width: 1px;
+//only primary style
+.button {
+    display: inline-block;
+    padding: 10px;
+    font-size: @font-size-base;
+    line-height: 1;
+    background: @color-g-1;
+    border: @border-width solid @color-g-4;
+    color: @color-p-1;
+    border-radius: @border-radius-base;
+    transition: background .05s, border .05s;
+    position: relative;
+    text-align: center;
+    .control();
+    &:hover {
+        background: fadeout(@color-g-4, 80%);
+        border-color: darken(@color-g-4, 15%);
+    }
+    &:active {
+        background: fadeout(@color-g-4, 90%);
+    }
+}
+.button--block {
+    display: block;
+}
+.arrow-mix() {
+    width: 40px;
+    &:after {
+        display: inline-block;
+        content: '\25B8'
+    }
+}
+.button--arrow-l {
+    .arrow-mix();
+    &:after {
+        transform: scaleX(-1);
+    }
+}
+.button--arrow-r {
+    .arrow-mix();
+    &:after {
+        content: '\25B8'
+    }
+}
+.button-group {
+    display: inline-flex;
+    .button {
+        border-radius: 0;
+        margin-left: -@border-width;
+        &:first-child {
+            border-radius: @border-radius-base 0 0 @border-radius-base;
+            margin-left: 0;
+        }
+        &:last-child {
+            border-radius: 0 @border-radius-base @border-radius-base 0;
+        }
+        &:hover {
+            z-index: 2;
+        }
+    }
+    .button--group-main {
+        flex: 1;
+    }
+}
+.button-group--flex {
+    display: flex;
+    width: 100%;
+}

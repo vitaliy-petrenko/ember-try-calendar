@@ -1,0 +1,17 @@
+@import (reference) '../variables';
+.make-default-padding() {
+    padding: @offset-xs;
+
+    @media only screen and (min-width: @screen-xs) {
+        padding: @offset-sm;
+    }
+
+    @media only screen and (min-width: @screen-sm) {
+        padding: @offset;
+    }
+}
+
+.make-wrap() {
+    max-width: @wrap-max-width;
+    margin: auto;
+}
