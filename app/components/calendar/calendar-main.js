@@ -39,7 +39,7 @@ export default Component.extend({
       cells = [],
       selectedDate = this.getSelectionDate(),
       currentMoment = moment().startOf('day'),
-      currentMD = parseInt(currentMoment.format('MDD'));
+      currentYMD = currentMoment.format('YYYYMMDD');
 
     let firstDate, lastDate;
 
@@ -53,11 +53,11 @@ export default Component.extend({
 
     for (let i = 0, j = -1; lastDate.isAfter(firstDate); i++, firstDate.add(1, 'days')) {
       const tempDate = firstDate.clone(),
-        tempMD = parseInt(tempDate.format('MDD')),
+        tempYMD = tempDate.format('YYYYMMDD'),
         cell = {
           title: tempDate.date() === 1 ? tempDate.format('D MMMM') : tempDate.format('D'),
-          past: currentMD > tempMD,
-          today: currentMD === tempMD
+          past: currentYMD > tempYMD,
+          today: currentYMD === tempYMD
         };
 
       if (i % 7 === 0) {
