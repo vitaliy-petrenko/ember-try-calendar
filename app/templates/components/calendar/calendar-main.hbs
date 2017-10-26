@@ -23,8 +23,8 @@
         </div>
         <label class="box__head-item">
             <select class="select" onchange={{action "changeTimeZone" value="target.value"}}>
-                {{#each timeZone.list as |timeZone|}}
-                    <option value="{{timeZone}}">{{timeZone}}</option>
+                {{#each timeZone.list as |zone|}}
+                    <option value="{{zone}}" selected={{if (eq timeZone.current zone) 'true'}}>{{zone}}</option>
                 {{/each}}
             </select>
         </label>
