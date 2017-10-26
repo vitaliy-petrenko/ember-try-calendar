@@ -4,6 +4,6 @@ const { Route } = Ember;
 
 export default Route.extend({
   beforeModel() {
-    this.transitionTo('calendar/week');
+    this.transitionTo('calendar.week');
   }
 });
