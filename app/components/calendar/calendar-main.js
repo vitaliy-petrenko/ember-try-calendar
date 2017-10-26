@@ -6,15 +6,18 @@ const { Component, computed, inject: { service } } = Ember;
 export default Component.extend({
   init() {
     this._super(...arguments);
-    this.set('selectedDate', moment());
   },
 
   timeZone: service(),
-  selectedDate: null,
+  calendarService: service('calendar'),
 
-  title: computed('selectedDate', 'view', 'timeZone.current', function() {
+  getSelectionDate() {
+    return this.get('calendarService').get('selectedDate');
+  },
+
+  title: computed('calendarService.selectedDate', 'view', 'timeZone.current', function() {
     const view = this.get('view'),
-      selectedDate = this.get('selectedDate');
+      selectedDate = this.getSelectionDate();
 
     if (view === 'week') {
       const weekStart = selectedDate.clone().startOf('isoweek'),
@@ -31,10 +34,10 @@ export default Component.extend({
     }
   }),
 
-  cells: computed('selectedDate', 'timeZone.current', function() {
+  cells: computed('calendarService.selectedDate', 'timeZone.current', function() {
     const view = this.get('view'),
       cells = [],
-      selectedDate = this.get('selectedDate'),
+      selectedDate = this.getSelectionDate(),
       currentMoment = moment().startOf('day'),
       currentMD = parseInt(currentMoment.format('MDD'));
 
@@ -73,15 +76,19 @@ export default Component.extend({
      */
     changeDate(direction) {
       const view = this.get('view'),
-        selectedDate = this.get('selectedDate'),
+        selectedDate = this.getSelectionDate(),
         period = view === 'week' ? 'weeks' : 'months',
         action = direction > 0 ? 'add' : 'subtract';
 
-      this.set('selectedDate', selectedDate.clone()[action](1, period));
+      this.get('calendarService').set('selectedDate', selectedDate.clone()[action](1, period));
     },
 
     changeTimeZone(value) {
       this.get('timeZone').changeTimeZone(value);
+    },
+
+    today() {
+      this.get('calendarService').set('selectedDate', moment());
     }
   }
 });
