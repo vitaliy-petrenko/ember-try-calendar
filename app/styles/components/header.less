@@ -4,10 +4,21 @@
 .header {
     background: @color-p-2;
     color: @color-g-1;
-    text-transform: uppercase;
 }
 
 .header__in {
     .make-default-padding();
     .make-wrap();
+    display: flex;
+}
+
+.logo {
+    text-transform: uppercase;
+}
+
+.header__item {
+    float: left;
+    & + & {
+        margin-left: @offset
+    }
 }
